@@ -32,6 +32,57 @@ window.addEventListener('DOMContentLoaded', () =>{
         fetched();
     })
 
+    let popScore = document.querySelector('.score');
+
+    function upVote() {
+        fetch('/kitten/upvote')
+            .then(res => {
+                if (!res.ok) {
+                    throw res;
+                }
+                return res.json()
+            })
+            .then(data => {
+                popScore.innerText = data.score;
+            })
+            .catch(err => {
+                err.json().then(errorJSON => {
+                    window.alert(errorJSON.message);
+                })
+            })
+    }
+
+    function downVote() {
+        fetch('/kitten/downvote')
+            .then(res => {
+                if (!res.ok) {
+                    throw res;
+                }
+                return res.json()
+            })
+            .then(data => {
+                popScore.innerText = data.score;
+            })
+            .catch(err => {
+                err.json().then(errorJSON => {
+                    window.alert(errorJSON.message);
+                })
+            })
+    }
+
+    let upvoteButton = document.getElementById('upvote');
+        upvoteButton.addEventListener('click', (event) => {
+            upVote();
+        })
+
+
+    let downvoteButton = document.getElementById('downvote');
+        downvoteButton.addEventListener('click', (event) => {
+            downVote();
+        })
+
+    
+
     
 
 
