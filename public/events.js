@@ -35,7 +35,9 @@ window.addEventListener('DOMContentLoaded', () =>{
     let popScore = document.querySelector('.score');
 
     function upVote() {
-        fetch('/kitten/upvote')
+        fetch('/kitten/upvote', {
+            method: 'PATCH'
+        })
             .then(res => {
                 if (!res.ok) {
                     throw res;
@@ -53,7 +55,9 @@ window.addEventListener('DOMContentLoaded', () =>{
     }
 
     function downVote() {
-        fetch('/kitten/downvote')
+        fetch('/kitten/downvote', {
+            method: 'PATCH'
+        })
             .then(res => {
                 if (!res.ok) {
                     throw res;
