@@ -85,9 +85,34 @@ window.addEventListener('DOMContentLoaded', () =>{
             downVote();
         })
 
-    
+        // let inputButton = document.querySelector('input')
+        // formData.append('name', 'id');
 
-    
+
+        const fileField = document.querySelector('.comment-form');
+
+        fileField.addEventListener('submit', (event) => {
+            event.preventDefault();
+            const formData = new FormData(fileField);
+            let commentSec = document.querySelector('.comments')
+        console.log(formData.get('user-comment'));
+        fetch('/kitten/comments', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({'comment': formData.get("user-comment")})
+        })
+        .then(res => res.json())
+        .then(data => {
+            // console.log(data)
+            let spanEl = document.createElement('span');
+            spanEl.innerHTML = `${data.comments[data.comments.length -1]}, `;
+            commentSec.appendChild(spanEl);
+        })
+    })
+    // console.log(inputButton);
+
+
+
 
 
 });
